@@ -1,0 +1,32 @@
+;; 忽略 上下翻铃声
+(setq ring-bell-function 'ignore)
+
+;; 打开行号
+(global-linum-mode t)
+
+
+(global-auto-revert-mode t)
+
+
+;; 激活缩写
+(abbrev-mode t)
+(define-abbrev-table 'global-abbrev-table '(
+					    ;; signature
+					    ("8zl" "zilongshanren")
+					    ;; emacs regex
+					    ;; Macrosoft
+					    ("8ms" "Macrosoft")
+
+
+					    ;; 禁用打开备份文件
+(setq make-backup-files nil)
+(setq auto-save-default nil)
+
+(recentf-mode t)
+(setq recentf-max-menu-items 25)
+
+
+;; 高亮匹配括号
+(add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
+
+(provide 'init-better-defaults)

@@ -1,0 +1,74 @@
+;; show linnumer
+;;(require 'linum)
+;(setq linum-format "%6d ")
+;(add-hook 'find-file-hooks (lambda () (linum-mode 1)))
+
+; 显示行号
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+
+(package-initialize)
+
+;; 
+(defun open-my-init-file()
+    (interactive)
+    (find-file "~/.emacs.d/init.el"))
+
+
+
+
+;;(add-to-list 'load-path "~/.emacs.d/lisp/")
+
+;;(require 'init-packages)
+;;(require 'init-ui)
+;;(require 'init-better-defaults)
+;;(require 'init-org)
+;;(require 'init-keybindings)
+
+;;(load 'init-packages)
+;;(load 'init-ui)
+;;(load 'init-better-defaults)
+;;(load 'init-org)
+;;(load 'init-keybindings)
+
+
+(load-file "~/.emacs.d/lisp/init-packages.elc")
+(load-file "~/.emacs.d/lisp/init-ui.elc")
+;;(load-file "~/.emacs.d/lisp/init-better-defaults.elc")
+(load-file "~/.emacs.d/lisp/init-org.elc")
+(load-file "~/.emacs.d/lisp/init-keybindings.elc")
+
+
+(setq custom-file (expand-file-name "lisp/custom.el" user-emacs-directory))
+
+(load-file custom-file)
+
+(autoload 'test-autoload "init-better-defaults")  
+(test-autoload)
+;; 关闭缩紧 
+;; (electric-indent-mode -1)
+
+;; 打开最近打开文件
+(require 'recentf)
+
+
+;; 删除多个空格
+(require 'hungry-delete)
+
+
+
+;; key for smex
+;;(require 'smex) ; Not needed if you use package.el
+ ;; (smex-initialize) ; Can be omitted. This might cause a (minimal) delay
+					; when Smex is auto-initialized on its first run.
+;;(global-set-key (kbd "M-x") 'smex)
+
+
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+
+
+
