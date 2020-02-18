@@ -10,6 +10,13 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 
+
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+
 (package-initialize)
 
 ;; 
@@ -63,12 +70,10 @@
 ;; key for smex
 ;;(require 'smex) ; Not needed if you use package.el
 ;; (smex-initialize) ; Can be omitted. This might cause a (minimal) delay
-					; when Smex is auto-initialized on its first run.
+                                        ; when Smex is auto-initialized on its first run.
 ;;(global-set-key (kbd "M-x") 'smex)
 
 
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
-
-
 

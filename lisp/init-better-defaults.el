@@ -25,6 +25,13 @@
 (recentf-mode t)
 (setq recentf-max-menu-items 25)
 
+;; 即使 不在括号上选中 也会高亮显示括号匹配
+(define-advice show-paren-function (:around (fn) fix-show-paren-function)
+  "Highlight enclosing parens."
+  (cond ((looking-at-p "\\s(") (funcall fn))
+	(t (save-excursion
+	     (ignore-errors (backward-up-list))
+	     (funcall fn)))))
 
 ;; 高亮匹配括号
 (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
@@ -80,5 +87,42 @@
 
 ;;  则可以使当一个窗口（frame）中存在两个分屏 （window）时，将另一个分屏自动设置成拷贝地址的目标
 (setq dired-dwin-target t)
+
+
+
+;; 隐藏 dos 下^M 符号
+(defun hidden-dos-eol ()
+  "Do not show ^M in files containing mixed UNIX and DOS line endings."
+  (interactive)
+  (unless buffer-display-table
+    (setq buffer-display-table (make-display-table)))
+  (aset buffer-display-table ?\^M []))
+
+;; 删除 dos 下^M 符号
+(defun remove-dos-eol ()
+  "Replace DOS eolns CR LF with Unix eolns CR"
+  (interactive)
+  (goto-char (point-min))
+  (while (search-forward "\r" nil t) (replace-match "")))
+
+
+;; Occur Mode
+;;(setq split-width-threshold 0)
+
+;; occur mode 增强 可以直接选中单词
+(defun occur-dwim ()
+  "Call `occur' with a sane default."
+  (interactive)
+  (push (if (region-active-p)
+	    (buffer-substring-no-properties
+	     (region-beginning)
+	     (region-end))
+	  (let ((sym (thing-at-point 'symbol)))
+	    (when (stringp sym)
+	      (regexp-quote sym))))
+	regexp-history)
+  (call-interactively 'occur))
+(global-set-key (kbd "M-s o") 'occur-dwim)
+
 
 (provide 'init-better-defaults)
