@@ -2,3 +2,10 @@
 
 ** TODO [#B] 短发短发短发 短发的地方大热天认同
 
+* Quick notes
+
+** TODO [#C] 
+  %![Error: (error Window system is not in use or not initialized)]
+ 
+  [2020-02-18 Tue 21:27]
+

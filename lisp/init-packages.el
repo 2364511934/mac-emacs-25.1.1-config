@@ -34,6 +34,7 @@
 		      js2-refactor
 		      expand-region
 		      iedit
+		      org-pomodoro
 		      ) "Default packages")
 
 
@@ -117,12 +118,11 @@
 
   (setq indent-tabs-mode nil))
 
-(global-set-key (kbd "C-c t i") 'my-toggle-web-indent)
 
 
 ;; js2-refactor
 (add-hook 'js2-mode-hook #'js2-refactor-mode)
-(js2r-add-keybindings-with-prefix "C-c C-m")
+
 
 
 ;; imenu 增强
@@ -144,14 +144,9 @@
 (add-hook 'js2-mode-hook
 	  (lambda ()
 	    (setq imenu-create-index-function 'js2-imenu-make-index)))
-(global-set-key (kbd "M-s i") 'counsel-imenu)
 
 
-;; expand-region 快捷键
-;; C-= 扩大区域 C-- C-= 缩小区域
-(global-set-key (kbd "C-=") 'er/expand-region)
-
-;; 绑定 iedit 编辑模式
-(global-set-key (kbd "M-s e") 'iedit-mode)
+;; 加载 org-pomodoro
+(require 'org-pomodoro)
 
 (provide 'init-packages)

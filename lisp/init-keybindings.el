@@ -36,4 +36,21 @@
 (with-eval-after-load 'dired
     (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
 
+
+(global-set-key (kbd "C-c r") 'org-capture)
+
+(global-set-key (kbd "C-c t i") 'my-toggle-web-indent)
+
+(js2r-add-keybindings-with-prefix "C-c C-m")
+
+;; expand-region 快捷键
+;; C-= 扩大区域 C-- C-= 缩小区域
+(global-set-key (kbd "C-=") 'er/expand-region)
+
+;; 绑定 iedit 编辑模式
+(global-set-key (kbd "M-s e") 'iedit-mode)
+
+(global-set-key (kbd "M-s i") 'counsel-imenu)
+
+
 (provide 'init-keybindings)
