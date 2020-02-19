@@ -34,7 +34,7 @@
 
 ;; dired  延迟加载
 (with-eval-after-load 'dired
-    (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
+  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
 
 
 (global-set-key (kbd "C-c r") 'org-capture)
@@ -52,5 +52,19 @@
 
 (global-set-key (kbd "M-s i") 'counsel-imenu)
 
+;; 我们可以使用下面的配置来在 Company-mode 中使用 C-n 与 C-p 来选择补全项，
+(with-eval-after-load 'company
+  (define-key company-active-map (kbd "M-n") nil)
+  (define-key company-active-map (kbd "M-p") nil)
+  (define-key company-active-map (kbd "C-n") #'company-select-next)
+  (define-key company-active-map (kbd "C-p") #'company-select-previous))
+
+
+;; helm-ag 绑定快捷键
+(global-set-key (kbd "C-c p s") 'helm-do-ag-project-root)
+
+;; auto-yasnippet 也是一个非常好用代码块补全插件。安装并未其设置快捷键
+(global-set-key (kbd "H-w") #'aya-create)
+(global-set-key (kbd "H-y") #'aya-expand)
 
 (provide 'init-keybindings)

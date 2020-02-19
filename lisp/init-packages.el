@@ -35,6 +35,9 @@
 		      expand-region
 		      iedit
 		      org-pomodoro
+		      helm-ag
+		      flycheck
+		      auto-yasnippet
 		      ) "Default packages")
 
 
@@ -148,5 +151,14 @@
 
 ;; 加载 org-pomodoro
 (require 'org-pomodoro)
+
+
+;; 开启flycheck 在js模式下开启flycheck
+(add-hook 'js2-mode-hook 'flycheck-mode)
+
+;; 所有编程语言中激活代码补全
+(require 'yasnippet)
+(yas-reload-all)
+(add-hook 'prog-mode-hook #'yas-minor-mode)
 
 (provide 'init-packages)
