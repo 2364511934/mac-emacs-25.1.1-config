@@ -67,4 +67,8 @@
 (global-set-key (kbd "H-w") #'aya-create)
 (global-set-key (kbd "H-y") #'aya-expand)
 
+;;开始之前我们先将 C-w 来使其可以向后删除一个单词，这样就可以与 Shell 中的快捷键操作同步
+(global-set-key (kbd "C-w") 'backward-kill-word)
+
+
 (provide 'init-keybindings)

@@ -2,7 +2,8 @@
 (tool-bar-mode -1)
 
 ;; 关闭滚动条
-(scroll-bar-mode -1)
+;;emacs 26.3 unsupport
+;;(scroll-bar-mode -1)
 
 ;; 关闭启动帮助画面
 (setq inhibit-splash-screen 1)

@@ -4,58 +4,71 @@
   (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
 			   ("melpa" . "http://elpa.emacs-china.org/melpa/"))))
 
+
+;;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+
+;;(add-to-list 'package-archives '("elpa" . "http://tromey.com/elpa/") t)
+
+;;(add-to-list 'package-archives '("melpa2" . "http://melpa.milkbox.net/packages/") t)
+
 ;; 注意 elpa.emacs-china.org 是 Emacs China 中文社区在国内搭建的一个 ELPA 镜像
 
 ;; cl - Common Lisp Extension
 (require 'cl)
 
 ;; Add Packages
-(defvar my/packages '(
-		      org
-		      ;; --- Auto-completion ---
-		      company
-		      ;; --- Better Editor ---
-		      hungry-delete
-		      swiper
-		      counsel
-		      smartparens
-		      ;; --- Major Mode ---
-		      js2-mode
-		      ;; --- Minor Mode ---
-		      nodejs-repl
-		      exec-path-from-shell
-		      ;; --- Themes ---
-		      monokai-theme
-		      ;; solarized-theme
-		      ;;smex
-		      popwin
-		      reveal-in-osx-finder
-		      web-mode
-		      js2-refactor
-		      expand-region
-		      iedit
-		      org-pomodoro
-		      helm-ag
-		      flycheck
-		      auto-yasnippet
-		      ) "Default packages")
+;;(defvar my/packages '(
+;;		      org
+;;		      ;; --- Auto-completion ---
+;;		      company
+;;		      ;; --- Better Editor ---
+;;		      hungry-delete
+;;		      swiper
+;;		      counsel
+;;		      smartparens
+;;		      ;; --- Major Mode ---
+;;		      js2-mode
+;;		      ;; --- Minor Mode ---
+;;		      nodejs-repl
+;;		      exec-path-from-shell
+;;		      ;; --- Themes ---
+;;		      monokai-theme
+;;		      ;; solarized-theme
+;;		      ;;smex
+;;		      popwin
+;;		      reveal-in-osx-finder
+;;		      web-mode
+;;		      js2-refactor
+;;		      expand-region
+;;		      iedit
+;;		      org-pomodoro
+;;		      helm-ag
+;;		      flycheck
+;;		      auto-yasnippet
+;;		      evil
+;;		      evil-leader
+;;		      window-numbering
+;;		      powerline
+;;		      ;;mwe-log-commands
+;;		      pallet
+;;		      ) "Default packages")
+;;
+;;
+;;;; 注意 elpa.emacs-china.org 是 Emacs China 中文社区在国内搭建的一个 ELPA 镜像
 
+;;(setq package-selected-packages my/packages)
 
-;; 注意 elpa.emacs-china.org 是 Emacs China 中文社区在国内搭建的一个 ELPA 镜像
+;;(defun my/packages-installed-p ()
+;;  (loop for pkg in my/packages
+;;	when (not (package-installed-p pkg)) do (return nil)
+;;	finally (return t)))
 
-(setq package-selected-packages my/packages)
-
-(defun my/packages-installed-p ()
-  (loop for pkg in my/packages
-	when (not (package-installed-p pkg)) do (return nil)
-	finally (return t)))
-
-(unless (my/packages-installed-p)
-  (message "%s" "Refreshing package database...")
-  (package-refresh-contents)
-  (dolist (pkg my/packages)
-    (when (not (package-installed-p pkg))
-      (package-install pkg))))
+;;(unless (my/packages-installed-p)
+;;  (message "%s" "Refreshing package database...")
+;;  (package-refresh-contents)
+;;  (dolist (pkg my/packages)
+;;    (when (not (package-installed-p pkg))
+;;      (package-install pkg))))
 
 ;; Find Executable Path on OS X
 (when (memq window-system '(mac ns))
@@ -160,5 +173,32 @@
 (require 'yasnippet)
 (yas-reload-all)
 (add-hook 'prog-mode-hook #'yas-minor-mode)
+
+;; evil mode
+(evil-mode 1)
+(setcdr evil-insert-state-map nil)
+(define-key evil-insert-state-map [escape] 'evil-normal-state)
+;;(setq eval-want-C-u-scroll t)
+(global-evil-leader-mode)
+
+
+(evil-leader/set-key
+  "ff" 'find-file
+  "bb" 'switch-to-buffer
+  "0"  'select-window-0
+  "1"  'select-window-1
+  "2"  'select-window-2
+  "3"  'select-window-3
+  "w/" 'split-window-right
+  "w-" 'split-window-below
+  ":"  'counsel-M-x
+  "wM" 'delete-other-windows
+  )
+
+
+(window-numbering-mode 1)
+
+(require 'powerline)
+;;(powerline-default-theme)
 
 (provide 'init-packages)
